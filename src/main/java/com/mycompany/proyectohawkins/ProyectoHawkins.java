@@ -24,15 +24,19 @@ public class ProyectoHawkins {
         boolean portalAbierto;
         int opcionMenu = 0;
         
+        
         System.out.println("\n HAWKINS NATIONAL LABORATOR ");
         System.out.println("Ingrese su nombre");
         operadorActual = scanner.nextLine();
         
+        
+        
         do{
-            System.out.println("\n--- SISTEMA HAWKINS ---");
+            System.out.println("\n Hola " + operadorActual + " --- SISTEMA HAWKINS --- ");
             System.out.println("1. Inspeccionar Sensor Individual");
             System.out.println("2. Iniciar Muestreo Continuo");
             System.out.println("0. Salir de la Consola");
+            opcionMenu = scanner.nextInt();
             
             switch (opcionMenu) {
                 
@@ -46,17 +50,42 @@ public class ProyectoHawkins {
                     System.out.println("portalAbierto " + portalAbierto);
                     break;
                 case 2:
-                    System.out.println("");
+                    simularMuestreoContinuo(scanner, LIMITE_RIESGO);
+                    System.out.println("El muestreo es:");
                     break;
                 case 0:
-                    System.out.println("");
+                    System.out.println(" Saliendo, hasta  pronto ");
                     break;
                 default:
-                    System.out.println("Opción no válida. Inténtalo de nuevo.");
+                    System.out.println("Opción no válida.");
                     break;
                     
             }
    
         } while (opcionMenu != 0);
+    }
+    
+    public static double leerLecturaSegura(Scanner scanner, String mensaje){
+        System.out.print(mensaje);
+        double lectura = scanner.nextDouble();
+        return lectura;
+    }
+    
+    public static int evaluarNivelRiesgo(double evaluar){
+        System.out.print(evaluar);
+        int evaluar = scanner.nextInt();
+        return 0;
+    }
+    
+    public static int calcularPorcentajeTruncado(Scanner scanner, int mensaje){
+        System.out.print(mensaje);
+        int calcular = scanner.nextInt();
+        return calcular;
+    }
+    
+    public static boolean ejecutarProtocoloAccion(Scanner scanner, int mensaje){
+        System.out.print(mensaje);
+        boolean ejecutar = scanner.nextBoolean();
+        return ejecutar;
     }
 }
