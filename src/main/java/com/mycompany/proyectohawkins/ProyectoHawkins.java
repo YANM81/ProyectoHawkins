@@ -11,9 +11,6 @@ import java.util.Scanner;
  * @author yezid
  */
 public class ProyectoHawkins {
-    
-    double leerLecturaSegura;
-    double evaluarNivelRiesgo;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -41,11 +38,11 @@ public class ProyectoHawkins {
                 
                 case 1:
                     sensorMedido = leerLecturaSegura(scanner, "Introduce lectura μT: ");
-                    sensorMedido = evaluarNivelRiesgo(sensorMedido);
+                    codigoRiesgo = evaluarNivelRiesgo(sensorMedido);
                     porcentajeEstado = calcularPorcentajeTruncado(sensorMedido, MAX_ENERGIA);
                     portalAbierto = ejecutarProtocoloAccion(codigoRiesgo);
                     System.out.println("\n--- Informe ---");
-                    System.out.println("Capacidad" + porcentajeEstado "%");
+                    System.out.println("Capacidad" + porcentajeEstado + "%");
                     System.out.println("portalAbierto " + portalAbierto);
                     break;
                 case 2:
