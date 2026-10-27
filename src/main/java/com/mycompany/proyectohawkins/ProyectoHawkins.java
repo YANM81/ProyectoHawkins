@@ -25,28 +25,25 @@ public class ProyectoHawkins {
         int opcionMenu = 0;
         
     
-        System.out.println("HAWKINS NATIONAL LABORATORY - ACCESO RESTRINGIDO");
+        System.out.println("-----------HAWKINS NATIONAL LABORATORY - ACCESO RESTRINGIDO------------");
         System.out.print("\nIngrese su nombre:   ");
         operadorActual = scanner.nextLine();   
         
-        mostrarEncabezado(operadorActual);    
+            
         
         do{
-            System.out.println("\n Hola " + operadorActual + " --- SISTEMA HAWKINS --- ");
-            System.out.println("1. Inspeccionar Sensor Individual");
-            System.out.println("2. Iniciar Muestreo Continuo");
-            System.out.println("0. Salir de la Consola");
+            mostrarEncabezado(operadorActual);
             opcionMenu = scanner.nextInt();
             
             switch (opcionMenu) {
                 
                 case 1:
                     sensorMedido = leerLecturaSegura(scanner, "Introduce lectura μT: ");
-                    codigoRiesgo = evaluarNivelRiesgo(sensorMedido);
+                    codigoRiesgo = evaluarNivelRiesgo(sensorMedido, LIMITE_RIESGO);
                     porcentajeEstado = calcularPorcentajeTruncado(sensorMedido, MAX_ENERGIA);
                     portalAbierto = ejecutarProtocoloAccion(codigoRiesgo);
                     System.out.println("\n--- Informe ---");
-                    System.out.println("Capacidad" + porcentajeEstado + "%");
+                    System.out.println("Capacidad " + porcentajeEstado + "%");
                     System.out.println("portalAbierto " + portalAbierto);
                     break;
                 case 2:
@@ -64,11 +61,8 @@ public class ProyectoHawkins {
         } while (opcionMenu != 0);
     }
     
-    public static void mostrarEncabezado(String operador){
-        System.out.println("\n\t==================================================\n");
-        System.out.println("\tLABORATORIO NACIONAL DE HAWKINS - SISTEMA DE CONTROL\n");
-        System.out.printf("\tOperario en turno:\t%s\n", operador);
-        System.out.println("\t==================================================\n\n");
+    public static void mostrarEncabezado(String operadorActual){
+            System.out.println("Hola " + operadorActual + "\n --- SISTEMA HAWKINS --- \n1. Inspeccionar Sensor Individual \n2. Iniciar Muestreo Continuo \n0. Salir de la Consola");
     }
 
     public static double leerLecturaSegura(Scanner scanner, String mensaje){
@@ -88,12 +82,12 @@ public class ProyectoHawkins {
         return lectura;
     }
     
-    public static int evaluarNivelRiesgo(double microTeslas){
-        String etiqueta = (microTeslas < 50.0) ? "Seguro" : (microTeslas <= 150.0) ? "Alerta" : "Crítico";
+    public static int evaluarNivelRiesgo(double microTeslas, double LIMITE_RIESGO){
+        String etiqueta = (microTeslas < 50.0) ? "Seguro" : (microTeslas <= LIMITE_RIESGO) ? "Alerta" : "Crítico";
         
         if (microTeslas < 50.0) {
             return 1; 
-        } else if (microTeslas <= 150.0) {
+        } else if (microTeslas <= LIMITE_RIESGO) {
             return 2;
         } else {
             return 3; 
@@ -101,8 +95,8 @@ public class ProyectoHawkins {
     }
     
     
-    public static int calcularPorcentajeTruncado(double lectura , double maxEnergia){
-        int porcentaje = (int )((lectura / maxEnergia) * 100);
+    public static int calcularPorcentajeTruncado(double lectura , double MAX_ENERGIA){
+        int porcentaje = (int )((lectura / MAX_ENERGIA) * 100);
         return porcentaje;
     }
     
@@ -129,7 +123,7 @@ public class ProyectoHawkins {
         double lectura;
 
         System.out.println("\n--- INICIANDO MUESTREO CONTINUO ---");
-        System.out.println("Introduce lecturas (Negativo para salir, 0 para saltar ciclo):");
+        System.out.println("Introduce lecturas (Negativo para salir, 0 para saltar ciclo): ");
 
         while (true) {
 
