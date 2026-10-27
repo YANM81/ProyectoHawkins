@@ -33,6 +33,8 @@ public class ProyectoHawkins {
         
         do{
             mostrarEncabezado(operadorActual);
+            
+            
             opcionMenu = scanner.nextInt();
             
             switch (opcionMenu) {
@@ -59,6 +61,8 @@ public class ProyectoHawkins {
             }
    
         } while (opcionMenu != 0);
+        
+        scanner.close();
     }
     
     public static void mostrarEncabezado(String operadorActual){
@@ -160,4 +164,3 @@ public class ProyectoHawkins {
         }
     }
 }
- 
