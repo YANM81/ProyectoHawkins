@@ -66,7 +66,13 @@ public class ProyectoHawkins {
     }
     
     public static void mostrarEncabezado(String operadorActual){
-            System.out.println("Hola " + operadorActual + "\n --- SISTEMA HAWKINS --- \n1. Inspeccionar Sensor Individual \n2. Iniciar Muestreo Continuo \n0. Salir de la Consola");
+        System.out.printf("\n%s\n", "==================================================");
+        System.out.printf(" Hola, %s\t--- SISTEMA HAWKINS ---\n", operadorActual);
+        System.out.printf("%s\n", "==================================================");
+        System.out.printf("\t1. Inspeccionar Sensor Individual\n");
+        System.out.printf("\t2. Iniciar Muestreo Continuo\n");
+        System.out.printf("\t0. Salir de la Consola\n");
+        System.out.printf("%s\n", "==================================================");
     }
 
     public static double leerLecturaSegura(Scanner scanner, String mensaje){
