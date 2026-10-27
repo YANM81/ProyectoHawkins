@@ -25,8 +25,8 @@ public class ProyectoHawkins {
         int opcionMenu = 0;
         
     
-        System.out.printf("HAWKINS NATIONAL LABORATORY - ACCESO RESTRINGIDO");
-        System.out.println("Ingrese su nombre");
+        System.out.println("HAWKINS NATIONAL LABORATORY - ACCESO RESTRINGIDO");
+        System.out.print("\nIngrese su nombre:   ");
         operadorActual = scanner.nextLine();   
         
         mostrarEncabezado(operadorActual);    
@@ -51,7 +51,6 @@ public class ProyectoHawkins {
                     break;
                 case 2:
                     simularMuestreoContinuo(scanner, LIMITE_RIESGO);
-                    System.out.println("El muestreo es:");
                     break;
                 case 0:
                     System.out.println(" Saliendo, hasta  pronto ");
@@ -66,10 +65,10 @@ public class ProyectoHawkins {
     }
     
     public static void mostrarEncabezado(String operador){
-        System.out.printf("\n\t==================================================\n");
-        System.out.printf("\tLABORATORIO NACIONAL DE HAWKINS - SISTEMA DE CONTROL\n");
+        System.out.println("\n\t==================================================\n");
+        System.out.println("\tLABORATORIO NACIONAL DE HAWKINS - SISTEMA DE CONTROL\n");
         System.out.printf("\tOperario en turno:\t%s\n", operador);
-        System.out.printf("\t==================================================\n\n");
+        System.out.println("\t==================================================\n\n");
     }
 
     public static double leerLecturaSegura(Scanner scanner, String mensaje){
