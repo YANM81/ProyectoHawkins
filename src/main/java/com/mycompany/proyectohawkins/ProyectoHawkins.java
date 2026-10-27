@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.mycompany.proyectohawkins.java;
+package com.mycompany.proyectohawkins;
 
 import java.util.Scanner;
 
@@ -24,12 +24,12 @@ public class ProyectoHawkins {
         boolean portalAbierto;
         int opcionMenu = 0;
         
-        
-        System.out.println("\n HAWKINS NATIONAL LABORATOR ");
+    
+        System.out.printf("HAWKINS NATIONAL LABORATORY - ACCESO RESTRINGIDO");
         System.out.println("Ingrese su nombre");
-        operadorActual = scanner.nextLine();
+        operadorActual = scanner.nextLine();   
         
-        
+        mostrarEncabezado(operadorActual);    
         
         do{
             System.out.println("\n Hola " + operadorActual + " --- SISTEMA HAWKINS --- ");
@@ -65,27 +65,106 @@ public class ProyectoHawkins {
         } while (opcionMenu != 0);
     }
     
+    public static void mostrarEncabezado(String operador){
+        System.out.printf("\n\t==================================================\n");
+        System.out.printf("\tLABORATORIO NACIONAL DE HAWKINS - SISTEMA DE CONTROL\n");
+        System.out.printf("\tOperario en turno:\t%s\n", operador);
+        System.out.printf("\t==================================================\n\n");
+    }
+
     public static double leerLecturaSegura(Scanner scanner, String mensaje){
-        System.out.print(mensaje);
-        double lectura = scanner.nextDouble();
+        double lectura = 0;
+        boolean entradaValida = false;
+        while(!entradaValida){    
+            try{
+
+               System.out.print(mensaje);
+                lectura = scanner.nextDouble();
+                entradaValida = true;
+            }catch (java.util.InputMismatchException e){    
+                System.out.println("Error: Debes introducir un valor numérico válido.");
+                scanner.next();
+            }
+        }
         return lectura;
     }
     
-    public static int evaluarNivelRiesgo(double evaluar){
-        System.out.print(evaluar);
-        int evaluar = scanner.nextInt();
-        return 0;
+    public static int evaluarNivelRiesgo(double microTeslas){
+        String etiqueta = (microTeslas < 50.0) ? "Seguro" : (microTeslas <= 150.0) ? "Alerta" : "Crítico";
+        
+        if (microTeslas < 50.0) {
+            return 1; 
+        } else if (microTeslas <= 150.0) {
+            return 2;
+        } else {
+            return 3; 
+        }
     }
     
-    public static int calcularPorcentajeTruncado(Scanner scanner, int mensaje){
-        System.out.print(mensaje);
-        int calcular = scanner.nextInt();
-        return calcular;
+    
+    public static int calcularPorcentajeTruncado(double lectura , double maxEnergia){
+        int porcentaje = (int )((lectura / maxEnergia) * 100);
+        return porcentaje;
     }
     
-    public static boolean ejecutarProtocoloAccion(Scanner scanner, int mensaje){
-        System.out.print(mensaje);
-        boolean ejecutar = scanner.nextBoolean();
-        return ejecutar;
+    public static boolean ejecutarProtocoloAccion(int codigoRiesgo){
+        switch(codigoRiesgo){
+            case 1:
+                System.out.print("Modo Estable");
+                return false;
+            case 2:
+                System.out.print("Anomalía Detectada");
+                return false;
+            case 3:
+                System.out.print("¡ALERTA MÁXIMA!");
+                return true;
+            default:
+                System.out.print("Código no válido");
+                return false;
+        }
+    }
+    
+    public static void simularMuestreoContinuo(Scanner teclado, double limite) {
+        double suma = 0;
+        int contador = 0;
+        double lectura;
+
+        System.out.println("\n--- INICIANDO MUESTREO CONTINUO ---");
+        System.out.println("Introduce lecturas (Negativo para salir, 0 para saltar ciclo):");
+
+        while (true) {
+
+            lectura = leerLecturaSegura(teclado, "Introduce lectura μT: ");
+
+
+            if (lectura < 0) {
+                System.out.println("Muestreo interrumpido por el operador.");
+                break;
+            }
+
+
+            if (lectura == 0) {
+                System.out.println("Lectura en 0. Saltando este ciclo...");
+                continue;
+            }
+
+
+            if (lectura > limite) {
+                System.out.println(" ¡ADVERTENCIA! Umbral de riesgo superado.");
+            }
+
+
+            suma += lectura;
+            contador++;
+        }
+
+
+        if (contador > 0) {
+            double media = suma / contador;
+            System.out.printf("\nMedia de las lecturas válidas: %.2f μT\n", media);
+        } else {
+            System.out.println("\nNo se registraron lecturas válidas.");
+        }
     }
 }
+ 
