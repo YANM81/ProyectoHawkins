@@ -31,7 +31,14 @@ public class ProyectoHawkins {
         do{
             mostrarEncabezado(operadorActual);
             
-            opcionMenu = scanner.nextInt();
+            try {
+                System.out.print("Elige una opción: ");
+                opcionMenu = scanner.nextInt();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Error: Debes introducir un número entero.");
+                scanner.next();
+                opcionMenu = -1;
+            }
             
             switch (opcionMenu) {
                 
@@ -113,16 +120,16 @@ public class ProyectoHawkins {
     public static boolean ejecutarProtocoloAccion(int codigoRiesgo){
         switch(codigoRiesgo){
             case 1:
-                System.out.print("Modo Estable");
+                System.out.println("Modo Estable");
                 return false; 
             case 2:
-                System.out.print("Anomalía Detectada");
+                System.out.println("Anomalía Detectada");
                 return false; 
             case 3:
-                System.out.print("¡ALERTA MÁXIMA!");
+                System.out.println("¡ALERTA MÁXIMA!");
                 return true;
             default:
-                System.out.print("Código no válido");
+                System.out.println("Código no válido");
                 return false;
         }
     }
